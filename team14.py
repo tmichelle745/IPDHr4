@@ -7,8 +7,8 @@
 ####
 
 team_name = 'Michelle Tas Team' # Only 10 chars displayed.
-strategy_name = 'The name the team gives to this strategy'
-strategy_description = 'How does this strategy decide?'
+strategy_name = 'michelles_strategy'
+strategy_description = 'Colludes until first betrayal. From then on, if number of betrayals greater than collude, betray, and if number of colludes greater than betrayals, collude'
     
 def move(my_history, their_history, my_score, their_score):
     ''' Arguments accepted: my_history, their_history are strings.
@@ -26,7 +26,23 @@ def move(my_history, their_history, my_score, their_score):
     # Analyze my_history and their_history and/or my_score and their_score.
     # Decide whether to return 'c' or 'b'.
     
-    return 'c'
+    if len(my_history)==0: # It's the first round; collude.
+        return 'c'
+    elif my_history[-1]=='c' and their_history[-1]=='b':
+        return 'b' # Betray if they were severely punished last time,
+    else:
+        return 'c' # otherwise collude
+    for i in their_history:
+        c = 0
+        b = 0
+        if i == 'b':
+            b += 1
+        else:
+            c += 1
+    if b >= c:
+        return 'b'
+    else: 
+        return 'c'
 
     
 def test_move(my_history, their_history, my_score, their_score, result):
