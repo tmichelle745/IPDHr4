@@ -39,7 +39,7 @@ def move(my_history, their_history, my_score, their_score):
             b += 1
         else:
             c += 1
-    if b >= c:
+    if b > c:
         return 'b'
     else: 
         return 'c'
